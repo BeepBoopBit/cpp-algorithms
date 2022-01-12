@@ -1,51 +1,6 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <fstream>
-
-bool checkPermutation(std::vector<std::vector<int>> dataVect){
-    std::vector<std::string> stringData;
-    for(auto i: dataVect){
-        std::string tempData;
-        for(auto j: i){
-            tempData += std::to_string(j) + ' ';
-        }
-        stringData.push_back(tempData);
-    }
-    bool isSame = false;
-    std::ifstream iFile("./Math/dataFiles.txt");
-    if(iFile.is_open()){
-        std::string indivLine;
-        while(std::getline(iFile, indivLine)){
-            bool isThere = false;
-            for(auto i: stringData){
-                if(i == indivLine){
-                    isThere = true;
-                    break;
-                }
-            }
-            if(!isThere){
-                return false;
-            }
-        }
-    }else{
-        std::cout << "Cannot Read File" << std::endl;
-        return false;
-    }
-    return true;
-}
-
-void print(std::vector<std::vector<int>> dataVect){
-    int counter = 1;
-    for(auto i: dataVect){
-        std::cout << counter++ << ": ";
-        for(auto j: i){
-            std::cout << j;
-        }
-        std::cout << std::endl;
-    }
-
-}
 
 std::vector<std::vector<int>> permutate(std::vector<int> dataVect, int startingIndex){  // can be improve
     // create a container for all the data
@@ -82,10 +37,7 @@ std::vector<std::vector<int>> permutation(std::vector<int> dataVect){ // can be 
         // copy the permutated data 
         std::copy(tempData.begin(), tempData.end(), std::back_inserter(container));
     }
-    print(container);
-    if(checkPermutation(container)){
-        std::cout << "ALL TEST CASE PASSED\n";
-    }
+    return container;
 }
 
 int main(){
