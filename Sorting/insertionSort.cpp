@@ -19,7 +19,7 @@ void insertionSort(int *arr, const int size){
     // array is sorted from right to left
 }
 
-void recursiveInsertionSort(int *arr, const int size, int tempI = 1){ // can be more optimized
+void recursionInsertionSort(int *arr, const int size, int tempI = 1){ // can be more optimized
     // base case
     if(tempI == size){
         return;
@@ -31,12 +31,24 @@ void recursiveInsertionSort(int *arr, const int size, int tempI = 1){ // can be 
             std::swap(arr[i-1], arr[i]);
         }
     }
-    recursiveInsertionSort(arr, size, ++tempI);
+    recursionInsertionSort(arr, size, ++tempI);
+}
+
+void recursionInsertionSort00(int *arr, const int size){
+    if(size == 1){
+        return;
+    }
+    recursionInsertionSort00(arr, size-1);
+    for(int i = size; i == 0; --i){
+        if(arr[i] < arr[i-1]){
+            std::swap(arr[i], arr[i-1]);
+        }
+    }
 }
 
 int main(){
     int arr[] = {10,9,8,7,6,5,4,3,2,1,0};
-    recursiveInsertionSort(arr,11);
+    recursionInsertionSort00(arr,11);
     for(auto i: arr){
         std::cout << i << ' ';
     }
